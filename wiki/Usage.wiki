@@ -9,7 +9,7 @@ Even though Fid.Gen markers are 100% compatible with reacTIVision and are based 
 
 ==Prerequisites==
 
-Fid.Gen should be relatively easy to use, but if you're serious about creating a new set of markers you're advised to at least read the above mentioned [http://reactable.iua.upf.edu/pdfs/reactivision_3rditeration2005.pdf this paper] in order to understand the basic functioning and properties of the markers.
+Fid.Gen should be relatively easy to use, but if you're serious about creating a new set of markers you're advised to at least read the above mentioned [http://reactable.iua.upf.edu/pdfs/reactivision_3rditeration2005.pdf paper] in order to understand the basic functioning and properties of the markers.
 
 ==Configuration file==
 
@@ -68,3 +68,16 @@ generator.label.numdigits=4
 # than 28 digits, Fid.Gen will discard markers which exceed this length automatically
 tree.sequence.maxlength=28
 }}}
+
+==User interface==
+
+Fid.Gen is using Sojamo's [http://www.sojamo.de/libraries/controlP5/ ControlP5] library to create a minimal GUI, but (if pre-configured) can also be fully operated via keyboard. 
+
+The shortcuts are as follows (case insensitive):
+  * *A* - accept and save current fiducial
+  * *X* - reject and discard current fiducial
+  * *S* - accept current fiducial and save all tree definitions generated so far (*Don't forget that important step!*)
+  * *N* - discard current marker and start new session (tree defs are NOT saved automatically)
+  * *L* - toggle fiducial ID display
+  * *H* - toggle tree depth sequence / stats display
+  * *I* - invert marker (note: you'll have to decide at the beginning of a session which way you want as this is not (yet) individual to markers)
