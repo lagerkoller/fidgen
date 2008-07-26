@@ -75,9 +75,53 @@ Fid.Gen is using Sojamo's [http://www.sojamo.de/libraries/controlP5/ ControlP5] 
 
 The shortcuts are as follows (case insensitive):
   * *A* - accept and save current fiducial
-  * *X* - reject and discard current fiducial
+  * *X* - reject and discard current fiducial (see next section below for why this is needed)
   * *S* - accept current fiducial and save all tree definitions generated so far (*Don't forget that important step!*)
   * *N* - discard current marker and start new session (tree defs are NOT saved automatically)
   * *L* - toggle fiducial ID display
   * *H* - toggle tree depth sequence / stats display
   * *I* - invert marker (note: you'll have to decide at the beginning of a session which way you want as this is not (yet) individual to markers)
+
+==Watch out==
+
+===Generation issues===
+Even though every generated fiducial will be *UNIQUE* (always just within the current session, fiducials do not have global identity by design, but are always "local" to the set they belong to), _not every single one of them will actually be *VALID*_!!!
+
+*The generation process definitely involves human supervision and judgement.*
+
+There're occasions when one or more of the following things happen and in this case the marker needs to be discarded:
+
+  * black (if on white background, else white) nodes  - the individual dots in the top part of the marker - sometimes are ending up too close to each other. The minimum distance should be the size of a dot.
+  * the marker outline interrupted due to overlapping nodes
+  * the marker grows to a size bigger than the window
+
+It's not a problem to discard markers like that (or even if just don't like the look of them!) - generation of a new one only takes a second or so...
+
+===reacTIVision issues===
+Whilst working on some projects using several hundreds of markers I've noticed that reacTIVision has some issue with more complex markers whose tree depth sequence exceeds 28 characters. Fid.Gen will automatically discard these, but based on experience there still seems to be a 1-3% chance that a generated marker will not be successfully decoded if part of a bigger set and I currently have no idea why that is (since all generated markers are in fact unique).
+
+The moral of this is: *DO TEST ALL YOUR MARKERS BEFORE USING THEM IN A LIVE PROJECT*
+
+==The tree index file==
+
+Please do not forget to *save the tree file* once you have generated all markers required. When generating hundreds of markers, consider saving regularly and then once at the end.
+
+*Without the tree definitions the generated markers are useless to reacTIVision.*
+
+==Last but not least: How to use the markers==
+
+For reacTIVision 1.3 you could specify a custom tree file via the commandline like:
+
+{{{
+./reactivion -t myfiducials.trees
+}}}
+
+In reacTIVision 1.4 you'll need to edit the supplied `reactivision.xml` file and add the following XML node:
+
+{{{
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<reactivision>
+...
+    <fiducial engine="amoeba" tree="fiducials-621_black.trees" />
+</reactivision>
+}}}
