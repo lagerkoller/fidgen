@@ -122,6 +122,6 @@ In reacTIVision 1.4 you'll need to edit the supplied `reactivision.xml` file and
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <reactivision>
 ...
-    <fiducial engine="amoeba" tree="fiducials-621_black.trees" />
+    <fiducial engine="amoeba" tree="myfiducials.trees" />
 </reactivision>
 }}}
