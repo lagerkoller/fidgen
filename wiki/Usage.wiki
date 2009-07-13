@@ -64,8 +64,9 @@ generator.orientation.minlength=0.75
 # purely for display purposes, number of digits the fiducial ID will be formatted to
 generator.label.numdigits=4
 
-# reacTIVision does not seem to be able to decode fiducials with a longer depth sequence
+# older versions reacTIVision did not seem to be able to decode fiducials with a longer depth sequence
 # than 28 digits, Fid.Gen will discard markers which exceed this length automatically
+# if you're using v1.4 or newer you can set this value to 999
 tree.sequence.maxlength=28
 }}}
 
@@ -98,9 +99,12 @@ There're occasions when one or more of the following things happen and in this c
 It's not a problem to discard markers like that (or even if just don't like the look of them!) - generation of a new one only takes a second or so...
 
 ===reacTIVision issues===
-Whilst working on some projects using several hundreds of markers I've noticed that reacTIVision has some issue with more complex markers whose tree depth sequence exceeds 28 characters. Fid.Gen will automatically discard these, but based on experience there still seems to be a 1-3% chance that a generated marker will not be successfully decoded if part of a bigger set and I currently have no idea why that is (since all generated markers are in fact unique).
+Whilst working on some projects using several hundreds of markers I've noticed that older versions of reacTIVision (pre 1.4) had issues with more complex markers whose tree depth sequence exceeds 28 characters. Fid.Gen can automatically discard these (see config settting above), but based on experience there still seems to be a 1-3% chance that a generated marker would not be successfully decoded if part of a bigger set.
 
-The moral of this is: *DO TEST ALL YOUR MARKERS BEFORE USING THEM IN A LIVE PROJECT*
+This issue seems to have been fixed by Martin Kaltenbrunner with reacTIVision v1.4 and hence can be ignored.
+
+The moral of this is story still is though:
+*DO TEST ALL YOUR MARKERS BEFORE USING THEM IN A LIVE PROJECT*
 
 ==The tree index file==
 
@@ -116,7 +120,7 @@ For reacTIVision 1.3 you could specify a custom tree file via the commandline li
 ./reactivion -t myfiducials.trees
 }}}
 
-In reacTIVision 1.4 you'll need to edit the supplied `reactivision.xml` file and add the following XML node:
+In reacTIVision 1.4 you'll need to edit the supplied `reactivision.xml` file (for OSX users: this file is packaged inside the reactivision app folder, right-click on it and choose "show package contents") and add the following XML node:
 
 {{{
 <?xml version="1.0" encoding="ISO-8859-1" ?>
