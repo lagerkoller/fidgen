@@ -1,4 +1,4 @@
-Copied from https://code.google.com/p/fidgen/
+THIS IS NOT MY PROJECT. I JUST COPIED IT HERE FOR BACKUP REASONS. Copied from https://code.google.com/p/fidgen/
 
 NEWS
 2009-07-13
